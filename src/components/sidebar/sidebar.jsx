@@ -1,20 +1,20 @@
 import productList from "./type/productList"
 import { useSelector } from "react-redux"
 import { useMediaQuery } from "react-responsive"
+import MobileSidebar from "./mobile"
 
 const Sidebar = ({ children }) => {
-	const { isSidebarOpen } = useSelector((state) => state.UI.isSidebarOpen)
+	const isDesktop = useMediaQuery({ query: "(min-width: 1150px)" })
 	return (
 		<>
-			<div className="flex flex-col h-full w-64 bg-gray-200 text-gray-900">
-				<div className="flex items-center justify-between h-16 px-4 bg-gray-100">
-					<span className="text-2xl font-semibold">Sidebar</span>
-					<button className="text-2xl">
-						<i className="fas fa-bars"></i>
-					</button>
+			{isDesktop && (
+				<div className="flex flex-wrap w-[300px] items-center h-96 justify-center p-4 m-4 bg-gray-100">
+					<div className="flex flex-col h-full w-full bg-gray-200 text-gray-900">
+						{children}
+					</div>
 				</div>
-				<div>{children}</div>
-			</div>
+			)}
+			{!isDesktop && <MobileSidebar>{children}</MobileSidebar>}
 		</>
 	)
 }
