@@ -7,10 +7,11 @@ import { useMediaQuery } from "react-responsive"
 export default function ListPage() {
 	const products = useSelector((state) => state.productList.products)
 	const isDesktop = useMediaQuery({ query: "(min-width: 1150px)" })
+	const isLocading = useSelector((state) => state.productList.isLoading)
 
 	return (
 		<>
-			<Header shouldShowMenu={isDesktop} />
+			<Header shouldShowMenu={!isDesktop} menu={<Sidebar.productList />} />
 			<div className="flex flex-row">
 				{isDesktop && (
 					<div className="flex flex-wrap items-center h-96 justify-center p-4 m-4 bg-gray-100">

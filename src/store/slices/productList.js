@@ -5,6 +5,7 @@ const productList = createSlice({
 	name: "productList",
 	initialState: {
 		products: defaultProducts,
+		loading: true,
 		filter: {},
 	},
 	reducers: {
