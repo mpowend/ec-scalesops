@@ -16,14 +16,6 @@ const productList = createSlice({
 		},
 		setFilter(state, action) {
 			state.filter = action.payload
-			state.shownProducts = state.products.filter((product) => {
-				const { minPrice, maxPrice, minRating, maxRating } = state.filter
-				if (minPrice && product.price < minPrice) return false
-				if (maxPrice && product.price > maxPrice) return false
-				if (minRating && product.rating.rate < minRating) return false
-				if (maxRating && product.rating.rate > maxRating) return false
-				return true
-			})
 			if (state.filter.sort === "price") {
 				state.shownProducts = state.shownProducts.sort(
 					(a, b) => a.price - b.price
@@ -48,7 +40,17 @@ const productList = createSlice({
 				state.shownProducts = state.shownProducts.sort((a, b) =>
 					b.title.localeCompare(a.title)
 				)
+			} else if (state.filter.sort === "default") {
+				state.shownProducts = state.products
 			}
+			state.shownProducts = state.shownProducts.filter((product) => {
+				const { minPrice, maxPrice, minRating, maxRating } = state.filter
+				if (minPrice && product.price < minPrice) return false
+				if (maxPrice && product.price > maxPrice) return false
+				if (minRating && product.rating.rate < minRating) return false
+				if (maxRating && product.rating.rate > maxRating) return false
+				return true
+			})
 		},
 	},
 })

@@ -6,7 +6,7 @@ import Input from "@/components/nano/input"
 export default function Sidebar({ children }) {
 	const dispatch = useDispatch()
 	const filter = useSelector((state) => state.productList.filter)
-	const [sort, setSort] = useState("price")
+	const [sort, setSort] = useState("default")
 
 	const handleSort = (e) => {
 		setSort(e.target.value)
@@ -24,8 +24,9 @@ export default function Sidebar({ children }) {
 			</div>
 			<div className="flex flex-col w-full items-center justify-center p-4 gap-4 bg-gray-200">
 				<div className="flex flex-row items-center justify-between p-4 bg-gray-100 w-full">
-					<h1>Sort</h1>
-					<select value={sort} onChange={handleSort}>
+					<h1>Sort:</h1>
+					<select value={sort} onChange={handleSort} className="rounded-sm">
+						<option value="default">Default</option>
 						<option value="price">Price Ascending</option>
 						<option value="-price">Price Descending</option>
 						<option value="rating">Rating Ascending</option>

@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { useMediaQuery } from "react-responsive"
 import { setProducts } from "@/store/slices/productList"
 import ScaleLoader from "react-spinners/ScaleLoader"
-import { within } from "./../../../node_modules/@popperjs/core/dist/esm/utils/within"
 
 export default function ListPage() {
 	const dispatch = useDispatch()
@@ -14,13 +13,11 @@ export default function ListPage() {
 	const products = useSelector((state) => state.productList.shownProducts)
 	const isDesktop = useMediaQuery({ query: "(min-width: 1150px)" })
 	const isLoading = useSelector((state) => state.productList.isLoading)
-	console.log(isLoading)
 
 	useEffect(() => {
 		fetch("https://fakestoreapi.com/products")
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
 				setTimeout(() => {
 					dispatch(setProducts(data))
 				}, 1000)
